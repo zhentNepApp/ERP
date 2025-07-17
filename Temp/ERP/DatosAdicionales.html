@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro información contacto</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <!-- ✅ CORRECTO -->
+        <img
+          src="../static/logoNetApp.png"
+          alt="Net Applications Logo"
+          style="height: 60px; margin-bottom: 15px"
+        />
+        <h1>Registro</h1>
+        <p>Información de contacto del tercero</p>
+      </div>
+
+      <form
+        id="registroForm"
+        action="../ERP/DatosAdicionales.html"
+        method="post"
+        target="_blank"
+      >
+        <div class="content">
+          <!-- NIT -->
+          <section class="section izquierda" id="section">
+            <div class="form-group">
+              <label for="nit">NIT <span class="required">*</span></label>
+              <input
+                type="text"
+                id="nit"
+                name="NIT"
+                required
+                placeholder="Ej: 900123456"
+              />
+            </div>
+
+            <!-- Primer Nombre -->
+            <div class="form-group">
+              <label for="primerNombre"
+                >Primer Nombre <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="primerNombre"
+                name="Primer Nombre"
+                required
+                placeholder="Ej: Jimena"
+              />
+            </div>
+
+            <!-- Primer Apellido -->
+            <div class="form-group">
+              <label for="primerApellido"
+                >Primer Apellido <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="primerApellido"
+                name="Primer Apellido"
+                required
+                placeholder="Ej: Gómez"
+              />
+            </div>
+
+            <!-- País -->
+            <div class="form-group">
+              <label for="pais">País <span class="required">*</span></label>
+              <input
+                type="text"
+                id="pais"
+                name="País"
+                required
+                placeholder="Ej: Colombia"
+              />
+            </div>
+
+            <!-- Ciudad -->
+            <div class="form-group">
+              <label for="ciudad">Ciudad <span class="required">*</span></label>
+              <input
+                type="text"
+                id="ciudad"
+                name="Ciudad"
+                required
+                placeholder="Ej: Bogotá"
+              />
+            </div>
+          </section>
+
+          <section class="section derecha" id="section">
+            <!-- Dirección -->
+            <div class="form-group">
+              <label for="direccion"
+                >Dirección <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="direccion"
+                name="Dirección"
+                required
+                placeholder="Ej: CR 61 B # 51 36 SUR"
+              />
+            </div>
+
+            <!-- Correo -->
+            <div class="form-group">
+              <label for="correo"
+                >Correo Electrónico <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                id="correo"
+                name="Correo"
+                required
+                placeholder="ejemplo@correo.com"
+              />
+            </div>
+
+            <!-- Teléfono -->
+            <div class="form-group">
+              <label for="telefono"
+                >Teléfono <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="telefono"
+                name="Teléfono"
+                required
+                placeholder="Ej: 3004560579"
+              />
+            </div>
+
+            <!-- Tipo Documento -->
+            <div class="form-group">
+              <label for="tipoDocumento"
+                >Tipo de Documento <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="tipoDocumento"
+                name="Tipo Documento"
+                required
+                placeholder="Ej: Cédula de Ciudadanía"
+              />
+            </div>
+
+            <!-- Número Documento -->
+            <div class="form-group">
+              <label for="numeroDocumento"
+                >Número de Documento <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="numeroDocumento"
+                name="Número Documento"
+                required
+                placeholder="Ej: 1234567890"
+              />
+            </div>
+          </section>
+        </div>
+
+        <div class="btn-conter">
+          <button type="submit" class="submit-btn">Guardar</button>
+        </div>
+        <!-- Botón de envío -->
+      </form>
+
+      <div id="successMessage" class="success-message">
+        ¡Registro enviado exitosamente! Gracias por completar el formulario.
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Obtener todos los datos del formulario
+          const formData = new FormData(this);
+          const datos = {};
+
+          for (let [key, value] of formData.entries()) {
+            datos[key] = value;
+          }
+
+          // Simular envío de datos (aquí puedes agregar tu lógica de envío)
+          console.log("Datos del formulario:", datos);
+
+          // Mostrar mensaje de éxito
+          const successMessage = document.getElementById("successMessage");
+          successMessage.style.display = "block";
+
+          // Limpiar formulario
+          this.reset();
+
+          // Ocultar mensaje después de 5 segundos
+          setTimeout(() => {
+            successMessage.style.display = "none";
+          }, 5000);
+
+          // Scroll suave hacia el mensaje
+          successMessage.scrollIntoView({ behavior: "smooth" });
+        });
+
+      // Agregar efectos de hover a los campos
+      const inputs = document.querySelectorAll("input, select, textarea");
+      inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.style.transform = "scale(1.02)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.style.transform = "scale(1)";
+        });
+      });
+    </script>
+  </body>
+</html>

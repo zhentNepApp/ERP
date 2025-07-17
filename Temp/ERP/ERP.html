@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Cliente/Proveedor</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+  </head>
+  <body>
+    <div class="containerERP">
+      <div class="header">
+        <!-- ✅ CORRECTO -->
+        <img
+          src="../static/logoNetApp.png"
+          alt="Net Applications Logo"
+          style="height: 60px; margin-bottom: 15px"
+        />
+        <h1>Registro</h1>
+        <p>Complete los datos para registrarse al tercero</p>
+      </div>
+
+      <form
+        id="registroForm"
+        action="../ERP/DatosAdicionales.html"
+        method="post"
+        target="_blank"
+      >
+        <div class="form-group">
+          <label for="nombreCompleto"
+            >Nombre Completo <span class="required">*</span></label
+          >
+          <input
+            type="text"
+            id="nombreCompleto"
+            name="nombreCompleto"
+            required
+            placeholder="Ingrese su nombre completo"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Tipo <span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="cliente"
+                name="tipo"
+                value="cliente"
+                required
+              />
+              <label for="cliente">Cliente</label>
+            </div>
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="proveedor"
+                name="tipo"
+                value="proveedor"
+                required
+              />
+              <label for="proveedor">Proveedor</label>
+            </div>
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="proveedor"
+                name="tipo"
+                value="proveedor"
+                required
+              />
+              <label for="proveedor">Proveedor</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pais">País <span class="required">*</span></label>
+          <input
+            type="text"
+            id="pais"
+            name="pais"
+            placeholder="Ingrese su país"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="medioPago"
+            >Medio de Pago <span class="required">*</span></label
+          >
+          <input
+            type="text"
+            id="medioPago"
+            name="medioPago"
+            placeholder="Ej: Tarjeta de crédito, PayPal, Transferencia bancaria..."
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="moneda">Moneda <span class="required">*</span></label>
+          <input
+            type="text"
+            id="moneda"
+            name="moneda"
+            placeholder="Ej: USD, EUR, COP, MXN..."
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="comentarios">Comentarios (Opcional)</label>
+          <textarea
+            id="comentarios"
+            name="comentarios"
+            placeholder="Agregue cualquier comentario adicional..."
+          ></textarea>
+        </div>
+
+        <div class="btn-conter">
+          <button type="submit" class="submit-btn">Continuar</button>
+        </div>
+      </form>
+
+      <div id="successMessage" class="success-message">
+        ¡Registro enviado exitosamente! Gracias por completar la información.
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Obtener todos los datos del formulario
+          const formData = new FormData(this);
+          const datos = {};
+
+          for (let [key, value] of formData.entries()) {
+            datos[key] = value;
+          }
+
+          // Simular envío de datos (aquí puedes agregar tu lógica de envío)
+          console.log("Datos del Tercero:", datos);
+
+          // Mostrar mensaje de éxito
+          const successMessage = document.getElementById("successMessage");
+          successMessage.style.display = "block";
+
+          // Limpiar formulario
+          this.reset();
+
+          // Ocultar mensaje después de 5 segundos
+          setTimeout(() => {
+            successMessage.style.display = "none";
+          }, 5000);
+
+          // Scroll suave hacia el mensaje
+          successMessage.scrollIntoView({ behavior: "smooth" });
+
+          // Redirigir después de 2 segundos
+          window.location.href = "DatosAdicionales.html";
+        });
+
+      // Agregar efectos de hover a los campos
+      const inputs = document.querySelectorAll("input, select, textarea");
+      inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.style.transform = "scale(1.02)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.style.transform = "scale(1)";
+        });
+      });
+    </script>
+  </body>
+</html>
