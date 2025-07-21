@@ -11,12 +11,14 @@
       <div class="header">
         <!-- ✅ CORRECTO -->
         <img
-          src="../static/logoNetApp.png"
+          src="../static/logoNetApp-sinfondo.png"
           alt="Net Applications Logo"
           style="height: 60px; margin-bottom: 15px"
         />
-        <h1>Registro</h1>
-        <p>Complete los datos para registrarse al tercero</p>
+        <div class="titulo">
+          <h1>Registro</h1>
+          <p>Complete los datos para registrarse al tercero</p>
+        </div>
       </div>
 
       <form
@@ -64,12 +66,12 @@
             <div class="radio-option">
               <input
                 type="radio"
-                id="proveedor"
+                id="contratista"
                 name="tipo"
-                value="proveedor"
+                value="contratista"
                 required
               />
-              <label for="proveedor">Proveedor</label>
+              <label for="contratista">Contratista</label>
             </div>
           </div>
         </div>
@@ -175,6 +177,40 @@
           this.parentElement.style.transform = "scale(1)";
         });
       });
+    </script>
+    <script>
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const datos = {};
+
+          for (let [key, value] of formData.entries()) {
+            datos[key] = value;
+          }
+
+          // Puedes generar un ID temporal para vincular formularios
+          datos["ID Cliente"] = "CL" + Date.now(); // Ejemplo de ID
+
+          // Estado de aprobación inicial
+          datos["Aprovado"] = 1;
+
+          fetch("/registrar-tercero", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos),
+          })
+            .then((res) => res.json())
+            .then((respuesta) => {
+              console.log("✅ Registrado:", respuesta);
+              localStorage.setItem("IDClienteActivo", datos["ID Cliente"]);
+              document.getElementById("successMessage").style.display = "block";
+              this.reset();
+            })
+            .catch((err) => console.error("❌ Error:", err));
+        });
     </script>
   </body>
 </html>

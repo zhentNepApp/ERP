@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscar tercero</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+  </head>
+  <body>
+    <div class="containerERP">
+      <div class="header">
+        <!-- ✅ CORRECTO -->
+        <img
+          src="../static/logoNetApp-sinfondo.png"
+          alt="Net Applications Logo"
+          style="height: 60px; margin-bottom: 15px"
+        />
+        <div class="titulo">
+          <h1>Buscar tercero</h1>
+        </div>
+      </div>
+
+      <form id="registroForm">
+        <div class="form-group">
+          <label for="nombreCompleto"
+            >Nombre Completo <span class="required">*</span></label
+          >
+          <input
+            type="text"
+            id="nombreCompleto"
+            name="nombreCompleto"
+            required
+            placeholder="Ingrese su nombre completo"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="nit">NIT <span class="required">*</span></label>
+          <input
+            type="text"
+            id="nit"
+            name="nit"
+            placeholder="Ingrese el NIT"
+            required
+          />
+        </div>
+
+        <div class="btn-conter">
+          <button type="submit" class="submit-btn" id="exportar">Buscar</button>
+        </div>
+        <div id="resultado"></div>
+      </form>
+
+      <!-- <div id="successMessage" class="success-message">
+        <div id="resultado"></div>
+      </div> -->
+    </div>
+
+    <script>
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Obtener todos los datos del formulario
+          const formData = new FormData(this);
+          const datos = {};
+
+          for (let [key, value] of formData.entries()) {
+            datos[key] = value;
+          }
+
+          // Simular envío de datos (aquí puedes agregar tu lógica de envío)
+          console.log("Datos del Tercero:", datos);
+
+          // Mostrar mensaje de éxito
+          const successMessage = document.getElementById("successMessage");
+          successMessage.style.display = "block";
+
+          // Limpiar formulario
+          this.reset();
+
+          // Ocultar mensaje después de 5 segundos
+          setTimeout(() => {
+            successMessage.style.display = "none";
+          }, 5000);
+
+          // Scroll suave hacia el mensaje
+          successMessage.scrollIntoView({ behavior: "smooth" });
+
+          // Redirigir después de 2 segundos
+          // window.location.href = "ERP.html";
+        });
+
+      // Agregar efectos de hover a los campos
+      const inputs = document.querySelectorAll("input, select, textarea");
+      inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.style.transform = "scale(1.02)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.style.transform = "scale(1)";
+        });
+      });
+    </script>
+    <script>
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const datos = {};
+
+          for (let [key, value] of formData.entries()) {
+            datos[key] = value;
+          }
+
+          fetch("/buscar-tercero", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos),
+          })
+            .then((res) =>
+              res.json().then((data) => ({ status: res.status, body: data }))
+            )
+            .then(({ status, body }) => {
+              const resultado = document.getElementById("resultado");
+
+              if (status === 404) {
+                resultado.innerHTML = `<p style="color:red;">❌ ${body.message}</p>`;
+                // Esperar 1 segundo y redirigir al formulario ERP.html
+                setTimeout(() => {
+                  window.location.href = "ERP.html";
+                }, 1000);
+              } else {
+                resultado.textContent = JSON.stringify(body, null, 2);
+              }
+            })
+            .catch((error) => {
+              document.getElementById(
+                "resultado"
+              ).textContent = `❌ Error al consultar: ${error.message}`;
+            });
+        });
+    </script>
+  </body>
+</html>

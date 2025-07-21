@@ -11,12 +11,14 @@
       <div class="header">
         <!-- ✅ CORRECTO -->
         <img
-          src="../static/logoNetApp.png"
+          src="../static/logoNetApp-sinfondo.png"
           alt="Net Applications Logo"
           style="height: 60px; margin-bottom: 15px"
         />
-        <h1>Registro</h1>
-        <p>Información de contacto del tercero</p>
+        <div class="titulo">
+          <h1>Registro</h1>
+          <p>Complete los datos para registrar al tercero</p>
+        </div>
       </div>
 
       <form
@@ -220,6 +222,40 @@
           this.parentElement.style.transform = "scale(1)";
         });
       });
+    </script>
+    <script>
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const datos = {};
+
+          for (let [key, value] of formData.entries()) {
+            datos[key] = value;
+          }
+
+          // Recuperar el mismo ID Cliente usado en el formulario anterior
+          datos["ID Cliente"] =
+            localStorage.getItem("IDClienteActivo") || "CL-temp";
+
+          // Estado de aprobación inicial
+          datos["Aprovado"] = 1;
+
+          fetch("/registrar-tercero", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos),
+          })
+            .then((res) => res.json())
+            .then((respuesta) => {
+              console.log("✅ Registrado:", respuesta);
+              document.getElementById("successMessage").style.display = "block";
+              this.reset();
+            })
+            .catch((err) => console.error("❌ Error:", err));
+        });
     </script>
   </body>
 </html>
