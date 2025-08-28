@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhentNepApp/RegistrosERP.git"
+    "url": "git+https://github.com/zhentNepApp/ERP.git"
   },
   "author": "Jesus Caballero",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zhentNepApp/RegistrosERP/issues"
+    "url": "https://github.com/zhentNepApp/ERP/issues"
   },
-  "homepage": "https://github.com/zhentNepApp/RegistrosERP#readme",
+  "homepage": "https://github.com/zhentNepApp/ERP#readme",
   "dependencies": {
     "express": "^5.1.0",
     "sqlite3": "^5.1.7"
