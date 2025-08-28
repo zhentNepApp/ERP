@@ -242,3 +242,35 @@ form {
   justify-content: center;
   margin-top: 20px;
 }
+
+.tabla-resultado {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-resultado th,
+.tabla-resultado td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.tabla-resultado th {
+  background-color: #007acc;
+  color: white;
+  font-weight: bold;
+}
+
+.columna-key {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  width: 30%;
+}
+
+.columna-value {
+  background-color: #fff;
+  width: 70%;
+}

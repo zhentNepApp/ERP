@@ -1,0 +1,26 @@
+{
+"terceros": [
+	{
+		"Nombre Completo" : "Jesus David Caballero",
+		"Tipo" : "Contratista",
+		"País" : "Bolivia",
+		"Medio de Pago" : "Efectivo",
+		"Comentarios" : "Se necesita mantenimiento de software",
+		"ID Cliente" : "8c85bb46",
+		"Aprovado" : 1,
+		"NIT" : 41261533,
+		"Primer Nombre" : "Jesus",
+		"Primer Apellido" : "Caballero",
+		"Ciudad" : "CARTAGENA",
+		"Direccion" : "CALLE 32 CON CARRERA 4",
+		"Correo" : "gaes1aejm@gmail.com",
+		"Telefono" : "3218745831",
+		"Tipo Documento" : "NIT",
+		"Numero Documento" : "41261533",
+		"Moneda" : "BOB",
+		"Monto" : 18000,
+		"Valor del Contrato" : 182000,
+		"Préstamo crédito" : "Sí",
+		"Nombre Entidad" : "Banco Pichincha"
+	}
+]}

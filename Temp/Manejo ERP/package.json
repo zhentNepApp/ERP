@@ -1,0 +1,27 @@
+{
+  "name": "desayuno",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "test",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhentNepApp/RegistrosERP.git"
+  },
+  "author": "Jesus Caballero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhentNepApp/RegistrosERP/issues"
+  },
+  "homepage": "https://github.com/zhentNepApp/RegistrosERP#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -105,6 +105,39 @@
       });
     </script>
     <script>
+      function mostrarTabla(data) {
+        const resultado = document.getElementById("resultado");
+        resultado.innerHTML = ""; // Limpiar contenido anterior
+
+        const tabla = document.createElement("table");
+        tabla.classList.add("tabla-resultado");
+
+        const thead = document.createElement("thead");
+        thead.innerHTML = `<tr><th>Campo</th><th>Valor</th></tr>`;
+        tabla.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+
+        for (const [key, value] of Object.entries(data)) {
+          const fila = document.createElement("tr");
+
+          const celdaKey = document.createElement("td");
+          celdaKey.textContent = key;
+          celdaKey.classList.add("columna-key");
+
+          const celdaValue = document.createElement("td");
+          celdaValue.textContent = value;
+          celdaValue.classList.add("columna-value");
+
+          fila.appendChild(celdaKey);
+          fila.appendChild(celdaValue);
+          tbody.appendChild(fila);
+        }
+
+        tabla.appendChild(tbody);
+        resultado.appendChild(tabla);
+      }
+
       document
         .getElementById("registroForm")
         .addEventListener("submit", function (e) {
@@ -116,6 +149,7 @@
           for (let [key, value] of formData.entries()) {
             datos[key] = value;
           }
+          console.log("Datos del Tercero:", datos);
 
           fetch("/buscar-tercero", {
             method: "POST",
@@ -133,9 +167,10 @@
                 // Esperar 1 segundo y redirigir al formulario ERP.html
                 setTimeout(() => {
                   window.location.href = "ERP.html";
-                }, 1000);
+                }, 2000);
               } else {
-                resultado.textContent = JSON.stringify(body, null, 2);
+                // resultado.textContent = JSON.stringify(body, null, 2);
+                mostrarTabla(body);
               }
             })
             .catch((error) => {
